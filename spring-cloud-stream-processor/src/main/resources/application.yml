@@ -1,0 +1,28 @@
+server:
+  port: 0 # 设置为0是为了启动多个实例
+
+spring:
+  cloud.stream:
+      kafka.binder:
+          brokers: hdsp001:6667,hdsp002:6667,hdsp003:6667
+          configuration:
+            default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+            default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+            commit.interval.ms: 1000
+          transaction:
+            transaction-id-prefix: job-
+            producer:
+              configuration:
+                retries: 1
+                acks: all
+      bindings:
+        job-supplier-output:
+          destination: job-processor
+          group: job-cousumer-processor-group
+        job-processor-output:
+          destination: job-sink
+
+logging:
+  level:
+    org.abigballofmud: ${LOGGING_LEVEL:debug}
+

@@ -1,0 +1,19 @@
+server:
+  port: 7073
+
+spring:
+  cloud.stream:
+      kafka.binder:
+          brokers: hdsp001:6667,hdsp002:6667,hdsp003:6667
+          configuration:
+            default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+            default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+            commit.interval.ms: 1000 # 自动提交offset到zookeeper的时间间隔
+            isolation.level: read_committed
+      bindings:
+        job-processor-output:
+          destination: job-sink
+          group: job-cousumer-sink-group
+logging:
+  level:
+    org.abigballofmud: ${LOGGING_LEVEL:debug}
