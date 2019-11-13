@@ -18,9 +18,12 @@ import org.springframework.cloud.stream.annotation.StreamListener;
 @Slf4j
 public class SinkDemo {
 
-    @StreamListener(JobSinkBinder.INPUT)
+    // @StreamListener(JobSinkBinder.INPUT)
+    @StreamListener(value = JobSinkBinder.INPUT, condition = "headers['jobType']=='sqoop'")
     public void handle(JobEvent data) {
+        log.info("=====================");
         log.debug("Sink Received: {}", data);
+        log.info("=====================");
     }
 
 }

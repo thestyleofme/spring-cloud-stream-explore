@@ -18,7 +18,9 @@ spring:
       bindings:
         job-supplier-output:
           destination: job-processor
-          group: job-cousumer-processor-group
+          group: job-consumer-processor-group
+          consumer:
+            max-attempts: 1
         job-processor-output:
           destination: job-sink
 

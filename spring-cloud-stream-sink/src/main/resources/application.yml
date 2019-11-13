@@ -13,7 +13,7 @@ spring:
       bindings:
         job-processor-output:
           destination: job-sink
-          group: job-cousumer-sink-group
+          group: job-consumer-sink-group
 logging:
   level:
     org.abigballofmud: ${LOGGING_LEVEL:debug}

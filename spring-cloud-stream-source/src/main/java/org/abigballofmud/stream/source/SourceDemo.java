@@ -29,8 +29,10 @@ public class SourceDemo {
     @PostMapping
     public String sendMessage(@RequestBody JobEvent incoming) {
         JobEvent jobEvent = JobEvent.builder().name(incoming.getName()).build();
+        // jobSourceBinder.output()
+        //         .send(MessageBuilder.withPayload(jobEvent).setHeader("jobType", "datax").build());
         jobSourceBinder.output()
-                .send(MessageBuilder.withPayload(jobEvent).setHeader("jobType", "datax").build());
+                .send(MessageBuilder.withPayload(jobEvent).setHeader("jobType", "sqoop").build());
         return "job sent";
     }
 
